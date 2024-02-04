@@ -36,7 +36,7 @@ const Home = () => {
       <div className="col-span-2">
         <SideBar />
       </div>
-      <div className="col-span-6 flex justify-center h-screen bg-slate-800">
+      <div className="col-span-6 flex justify-center h-screen">
         {loading ? (
           <div className="flex items-center justify-center w-full h-screen">
             <CgSpinner className="w-20 h-10 animate-spin" />
