@@ -9,18 +9,30 @@ import { CgSpinner } from "react-icons/cg";
 import UserListItem from "./UserListItem";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { IChat } from "../types";
 
-const SideBar = () => {
+type ISidebarProps = {
+  selectedChatId?: string;
+};
+
+const SideBar = ({ selectedChatId }: ISidebarProps) => {
   const router = useRouter();
   const [user] = useAuthState(auth);
 
   const [snapshotUser] = useCollection(collection(db, "users"));
+
   const users = snapshotUser?.docs.map((doc: DocumentData) => ({
     id: doc.id,
     ...doc.data(),
   }));
 
-  const filterdUsers = users?.filter((user) => user.email !== user);
+  const [snapshotChat] = useCollection(collection(db, "chats"));
+  const chats = snapshotChat?.docs.map((doc: DocumentData) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  const filterdUsers = users?.filter((user) => user.email !== user.email);
 
   const logout = () => {
     signOut(auth);
@@ -43,8 +55,16 @@ const SideBar = () => {
           로그아웃
         </button>
       </div>
-      <div>
-        <UserListItem />
+      <div className="w-full">
+        {filterdUsers?.map((receiver) => (
+          <UserListItem
+            key={receiver.email}
+            sender={user}
+            receiver={receiver}
+            chats={chats as IChat[]}
+            selectedId={selectedChatId}
+          />
+        ))}
       </div>
     </div>
   );
