@@ -32,7 +32,9 @@ const SideBar = ({ selectedChatId }: ISidebarProps) => {
     ...doc.data(),
   }));
 
-  const filterdUsers = users?.filter((user) => user.email !== user.email);
+  const filteredUsers = users?.filter(
+    (otherUser) => otherUser.email !== user?.email
+  );
 
   const logout = () => {
     signOut(auth);
@@ -56,7 +58,7 @@ const SideBar = ({ selectedChatId }: ISidebarProps) => {
         </button>
       </div>
       <div className="w-full">
-        {filterdUsers?.map((receiver) => (
+        {filteredUsers?.map((receiver) => (
           <UserListItem
             key={receiver.email}
             sender={user}

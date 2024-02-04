@@ -22,6 +22,7 @@ const UserListItem = ({
 }: UserListItemProps) => {
   const chatExists = (receiverEmail: string) => {
     const senderEmail = sender.email!;
+
     return chats?.find(
       (chat: IChat) =>
         chat?.users?.includes(senderEmail) &&
@@ -38,6 +39,9 @@ const UserListItem = ({
   const chat = chatExists(receiver.email!);
 
   const handleClick = async () => {
+    console.log("Chat:", chat);
+    console.log("SelectedId:", selectedId);
+
     const senderData = {
       displayName: sender.displayName,
       photoURL: sender.photoURL,
@@ -65,7 +69,9 @@ const UserListItem = ({
   return (
     <div className="w-full p-4">
       <div
-        className="w-5/6 mx-auto px-4 flex flex-row items-center py-2 cursor-pointer"
+        className={`w-5/6 mx-auto px-4 flex flex-row items-center py-2 cursor-pointer ${
+          chat && chat.id === selectedId && "border rounded-md"
+        }`}
         onClick={handleClick}
       >
         <div>
