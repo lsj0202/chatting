@@ -50,7 +50,7 @@ const SideBar = ({ selectedChatId }: ISidebarProps) => {
   }
 
   return (
-    <div className="flex flex-col items-start w-full h-screen border-gray-200">
+    <div className="flex flex-col items-start w-full h-screen border-gray-200 border-r">
       <div className="flex items-center justify-between w-full p-4 text-xl font-bold border-b border-gray200 h-[70px]">
         <p className="">채팅</p>
         <button className="text-sm font-medium" onClick={() => logout()}>
