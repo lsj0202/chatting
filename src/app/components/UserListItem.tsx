@@ -39,9 +39,6 @@ const UserListItem = ({
   const chat = chatExists(receiver.email!);
 
   const handleClick = async () => {
-    console.log("Chat:", chat);
-    console.log("SelectedId:", selectedId);
-
     const senderData = {
       displayName: sender.displayName,
       photoURL: sender.photoURL,
